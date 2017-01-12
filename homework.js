@@ -29,11 +29,54 @@ window.onload=function(){
 
 //part 3
 
-window.addEventListener("keypress", myFunction());
+window.addEventListener("keypress", function(event){
+	var header = document.getElementById("keydetect")
+    header.innerHTML = "<h1>"+event.key+"</h1>"
+});
 
-function myFunction() {
-    // document.getElementById("keydetect").innerHTML = "<h1></h1>"
-    var header = document.getElementById("keydetect")
-    // header.innerHTML="<h1"+event.key+"</h1>"
-    console.log(event.keypress)
+
+// }
+// part 4
+
+
+var header = document.getElementById("header")
+var button = document.getElementById("login-button")
+
+button.addEventListener("click", function() {
+  validateForm()
+})
+
+
+function validateForm() {
+  if(checkPassword() == true && checkUsername() == true) {
+    header.innerHTML = "<h1>You're now logged in!</h1>"
+  } else {
+    alert("Incorrect!")
+  }
+}
+
+function checkPassword() {
+  var password = document.getElementById("password").value
+
+  if (password == "12345678") {
+    return true
+  } else {
+    return false
+  }
+}
+
+function checkUsername() {
+  var username = document.getElementById("username").value
+
+  var characters = username.split("")
+
+  var presence = characters.map(function(element) {
+    return Number.isInteger(parseInt(element))
+  })
+
+  if (presence.indexOf(true) !== -1) {
+    return true
+  } else {
+    return false
+  }
 }
